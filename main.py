@@ -30,11 +30,15 @@ async def on_voice_state_update(member, before, after):
         channel = await guild.create_voice_channel(member.name + "" + "'s Channel", overwrites=None, category=category_channel, reason=None)
         voice_channel = client.get_channel(channel.id)    
         await member.move_to(voice_channel)
-        if after.channel.id == "None":
-            print("a")
+        return
+        
     else:
         return
 
+
+@client.event
+async def on_voice_state_update(member, before, after): #delete channel if it is empty
+    channel = client.get_channel(before.channel.id)
     
 
 
