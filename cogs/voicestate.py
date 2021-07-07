@@ -1,26 +1,5 @@
-from inspect import EndOfBlock
-import discord
-from discord.channel import VoiceChannel
-from discord.client import Client
+from discord
 from discord.ext import commands
-from discord 
-
-
-
-
-client = discord.Client()
-
-@client.event
-async def on_ready():
-    print('We have logged in as {0.user}'.format(client))
-
-@client.event
-async def on_message(message):
-    if message.author == client.user:
-        return
-
-    if message.content.startswith('$hello'):
-        await message.channel.send('Hello!')
 
 
 #new channel on join
@@ -61,14 +40,3 @@ async def on_voice_state_update(member, before, after): #delete channel if it is
         else:
             print("not empty yet")
             return
-
-
-
-
-    
-
-
-
-
-
-client.run('ODI2MDAyNzY0OTk1MTAwNzMy.YGGJBQ.DrTZuA9nSbskRgL2rAwQWlBkKfU')
