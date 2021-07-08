@@ -16,17 +16,19 @@ class voicestate(commands.Cog):
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after): #delete channel if it is empty
         if before.channel == None:
-            print("none")
+            #print("none")
             return
 
         else:
-            print("a")
+            #print("a")
             channel = client.get_channel(before.channel)
             bmember_count = len(before.channel.voice_states)
             #print(before.channel.voice_states)
             #print(bmember_count)#before
-            if bmember_count == 0 and before.channel.id != 862285957699993600:#1
-                print("Delete")
+            channell = discord.utils.get(member.guild.channels, name="Join to Create")
+            channel_id = channell.id
+            if bmember_count == 0 and before.channel.id != channel_id:#1
+                #print("Delete")
                 await before.channel.delete()
                 return
 
@@ -34,10 +36,6 @@ class voicestate(commands.Cog):
                 print("not empty yet")
                 return
 
-
-    @commands.Cog.listener()
-    async def on_ready(self):
-        print("cog working")
 
 
 

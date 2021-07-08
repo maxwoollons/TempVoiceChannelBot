@@ -9,6 +9,10 @@ from discord.ext.commands.core import command
 
 
 
+
+
+
+
 client = commands.Bot(command_prefix = "!",description='I am a VoiceChannel Bot, DM Sand#4193 for assistence')
 
 
@@ -36,12 +40,16 @@ async def on_ready():
 #new channel on join
 @client.event
 async def on_voice_state_update(member, before, after):
-    print("aaa")
-    guild = client.get_guild(803394988187582464)
+    global cat
+    #print("aaa")
+    guild = member.guild
+    channel = discord.utils.get(member.guild.channels, name="Join to Create")
+    channel_id = channel.id
+    print(channel_id)
     #print(member,before,after)
-    if after.channel and after.channel.id == 862285957699993600: #2
-        category_channel = guild.get_channel(819838582767484998)
-        channel = await guild.create_voice_channel(member.name + "" + "'s Channel", overwrites=None, category=category_channel, reason=None)
+    if after.channel and after.channel.id == channel_id: #2
+        #category_channel = after.channel.id.partent # fixx
+        channel = await guild.create_voice_channel(member.name + "" + "'s Channel", overwrites=None, category=cat, reason=None)
         voice_channel = client.get_channel(channel.id)    
         await member.move_to(voice_channel)
         return
@@ -72,7 +80,22 @@ async def unlock(ctx):
 
 
 
+@client.command()
+async def setup(ctx):   
+    global cat
+    guild = ctx.message.guild
+    print(guild)
+    Voicey = "Voice Channels"
+    await ctx.send("Starting Setup...")
+    global cat
+    channel = await guild.create_category(Voicey, overwrites=None, reason=None, position=None)
+    cat = client.get_channel(channel.id)
+    await guild.create_voice_channel("Join to Create", overwrites=None, category=cat, reason=None)
 
+
+
+    await ctx.send("Finished setup")
+    return
 
 
 
