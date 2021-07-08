@@ -45,11 +45,11 @@ async def on_voice_state_update(member, before, after):
     guild = member.guild
     channel = discord.utils.get(member.guild.channels, name="Join to Create")
     channel_id = channel.id
-    print(channel_id)
+    #print(channel_id)
     #print(member,before,after)
     if after.channel and after.channel.id == channel_id: #2
-        #category_channel = after.channel.id.partent # fixx
-        channel = await guild.create_voice_channel(member.name + "" + "'s Channel", overwrites=None, category=cat, reason=None)
+        category_channel = discord.utils.get(guild.categories, name="Voice Channels")
+        channel = await guild.create_voice_channel(member.name + "" + "'s Channel", overwrites=None, category=category_channel, reason=None)
         voice_channel = client.get_channel(channel.id)    
         await member.move_to(voice_channel)
         return
@@ -62,8 +62,8 @@ async def on_voice_state_update(member, before, after):
 @client.command()
 async def lock(ctx):
     channel = client.get_channel(ctx.author.voice.channel)
-    print(ctx.author.voice.channel)
-    print(channel)
+    #print(ctx.author.voice.channel)
+    #print(channel)
     await ctx.author.voice.channel.set_permissions(ctx.guild.default_role,connect=False)
     await ctx.send("Locked")
     return
@@ -72,7 +72,7 @@ async def lock(ctx):
 @client.command()
 async def unlock(ctx):
     channel = client.get_channel(ctx.author.voice.channel)
-    print(channel)
+    #print(channel)
     await ctx.author.voice.channel.set_permissions(ctx.guild.default_role,connect=True)
 
     await ctx.send("Unlocked")
