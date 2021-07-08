@@ -3,12 +3,13 @@ import discord
 from discord.channel import VoiceChannel
 from discord.client import Client
 from discord.ext import commands
+from discord.ext.commands.core import command
 
 
 
 
 
-client = commands.Bot(command_prefix = "!")
+client = commands.Bot(command_prefix = "!",description='I am a VoiceChannel Bot, DM Sand#4193 for assistence')
 
 
 #cogs
@@ -28,14 +29,8 @@ for cog in cogs:
 @client.event
 async def on_ready():
     print('We have logged in as {0.user}'.format(client))
-
-@client.event
-async def on_message(message):
-    if message.author == client.user:
-        return
-
-    if message.content.startswith('$hello'):
-        await message.channel.send('Hello!')
+    # Setting `Listening ` status
+    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="Out for !help"))
 
 
 #new channel on join
@@ -55,7 +50,30 @@ async def on_voice_state_update(member, before, after):
         return
 
 
-    
+
+@client.command()
+async def lock(ctx):
+    channel = client.get_channel(ctx.author.voice.channel)
+    print(ctx.author.voice.channel)
+    print(channel)
+    await ctx.author.voice.channel.set_permissions(ctx.guild.default_role,connect=False)
+    await ctx.send("Locked")
+    return
+
+
+@client.command()
+async def unlock(ctx):
+    channel = client.get_channel(ctx.author.voice.channel)
+    print(channel)
+    await ctx.author.voice.channel.set_permissions(ctx.guild.default_role,connect=True)
+
+    await ctx.send("Unlocked")
+    return
+
+
+
+
+
 
 
 

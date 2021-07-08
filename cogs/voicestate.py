@@ -41,9 +41,9 @@ class voicestate(commands.Cog):
 
 
 
-    @commands.command()
-    async def a(self,ctx):
-        await ctx.send("a")
+    #@commands.command()
+    #async def a(self,ctx):
+        #await ctx.send("a")
 
 
 
