@@ -29,6 +29,7 @@ for cog in cogs:
 #-----------------------------------------------
 
 
+client.remove_command("help")
 
 @client.event
 async def on_ready():
@@ -82,21 +83,41 @@ async def unlock(ctx):
 
 @client.command()
 async def setup(ctx):   
-    global cat
-    guild = ctx.message.guild
-    print(guild)
-    Voicey = "Voice Channels"
-    await ctx.send("Starting Setup...")
-    global cat
-    channel = await guild.create_category(Voicey, overwrites=None, reason=None, position=None)
-    cat = client.get_channel(channel.id)
-    await guild.create_voice_channel("Join to Create", overwrites=None, category=cat, reason=None)
+    if ctx.message.author.server_permissions.administrator:
+        global cat
+        guild = ctx.message.guild
+        
+        print(guild)
+        Voicey = "Voice Channels"
+        await ctx.send("Starting Setup...")
+        global cat
+        channel = await guild.create_category(Voicey, overwrites=None, reason=None, position=None)
+        cat = client.get_channel(channel.id)
+        await guild.create_voice_channel("Join to Create", overwrites=None, category=cat, reason=None)
+    else:
+        return
 
 
 
     await ctx.send("Finished setup")
     return
 
+
+
+@client.command()
+async def help(ctx):
+    em = discord.Embed(title = "Help", description = "This is the help menu. DM Sand#4193 for assistance or feedback.")
+    em.add_field(name="Setup",value="!setup, !invite")
+    em.add_field(name="Voice Channels",value="!lock, !unlock")
+    await ctx.send(embed=em)
+    return
+
+
+@client.command()
+async def invite(ctx):
+    await ctx.send("Here is my invite link:")
+    await ctx.send("https://discord.com/oauth2/authorize?client_id=826002764995100732&scope=bot&permissions=8")
+    return
 
 
 
