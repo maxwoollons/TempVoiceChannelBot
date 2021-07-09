@@ -27,13 +27,16 @@ class voicestate(commands.Cog):
             #print(bmember_count)#before
             channell = discord.utils.get(member.guild.channels, name="Join to Create")
             channel_id = channell.id
-            if bmember_count == 0 and before.channel.id != channel_id:#1
+            guild = member.guild
+            category_channel = discord.utils.get(guild.categories, name="Voice Channels") #category of setup
+            #print(category_channel)
+            if bmember_count == 0 and before.channel.id != channel_id and category_channel == before.channel.category:#1
                 #print("Delete")
                 await before.channel.delete()
                 return
 
             else:
-                print("not empty yet")
+                print("not empty yet or is not supposed to be deleted")
                 return
 
 

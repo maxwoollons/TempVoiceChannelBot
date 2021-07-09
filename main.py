@@ -13,7 +13,7 @@ from discord.ext.commands.core import command
 
 
 
-client = commands.Bot(command_prefix = "!",description='I am a VoiceChannel Bot, DM Sand#4193 for assistence')
+client = commands.Bot(command_prefix = "!",description='I am a VoiceChannel Bot, DM Sand#4193 for assistance')
 
 
 #cogs
