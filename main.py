@@ -83,7 +83,7 @@ async def unlock(ctx):
 
 @client.command()
 async def setup(ctx):   
-    if ctx.message.author.server_permissions.administrator:
+    if ctx.message.author.guild_permissions.administrator:
         global cat
         guild = ctx.message.guild
         
@@ -124,3 +124,10 @@ async def invite(ctx):
 
 
 client.run('ODI2MDAyNzY0OTk1MTAwNzMy.YGGJBQ.DrTZuA9nSbskRgL2rAwQWlBkKfU')
+
+
+
+
+
+# dev = ODYzMDExOTkxMTAyOTQ3MzI4.YOgsjA.VTg4NdfSTg_ivGxhqUUCHyzFD24
+#live = ODI2MDAyNzY0OTk1MTAwNzMy.YGGJBQ.DrTZuA9nSbskRgL2rAwQWlBkKfU
