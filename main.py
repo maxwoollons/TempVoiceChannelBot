@@ -115,8 +115,9 @@ async def help(ctx):
 
 @client.command()
 async def invite(ctx):
-    await ctx.send("Here is my invite link:")
-    await ctx.send("https://discord.com/oauth2/authorize?client_id=826002764995100732&scope=bot&permissions=8")
+    channel = await ctx.author.create_dm()
+    await channel.send("Here is my invite link:")
+    await channel.send("https://bit.ly/3huSe00")
     return
 
 
@@ -129,5 +130,5 @@ client.run('ODI2MDAyNzY0OTk1MTAwNzMy.YGGJBQ.DrTZuA9nSbskRgL2rAwQWlBkKfU')
 
 
 
-# dev = ODYzMDExOTkxMTAyOTQ3MzI4.YOgsjA.VTg4NdfSTg_ivGxhqUUCHyzFD24
+#dev = ODYzMDExOTkxMTAyOTQ3MzI4.YOgsjA.VTg4NdfSTg_ivGxhqUUCHyzFD24
 #live = ODI2MDAyNzY0OTk1MTAwNzMy.YGGJBQ.DrTZuA9nSbskRgL2rAwQWlBkKfU
