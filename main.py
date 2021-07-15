@@ -4,9 +4,7 @@ from discord.channel import VoiceChannel
 from discord.client import Client
 from discord.ext import commands
 from discord.ext.commands.core import command
-
-
-
+import datetime #need to install this on the live server
 
 
 
@@ -16,8 +14,9 @@ from discord.ext.commands.core import command
 client = commands.Bot(command_prefix = "!",description='I am a VoiceChannel Bot, DM Sand#4193 for assistance')
 
 
+
 #cogs
-cogs = ['cogs.voicestate']
+cogs = ['cogs.voicestate','cogs.jokes']
 
 for cog in cogs:
     try:
@@ -34,8 +33,12 @@ client.remove_command("help")
 @client.event
 async def on_ready():
     print('We have logged in as {0.user}'.format(client))
+    server_amt = len(client.guilds)
+    listning = "for !help | " + str(server_amt) + " servers"
     # Setting `Listening ` status
-    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="Out for !help"))
+    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=listning))
+    return
+
 
 
 #new channel on join
@@ -43,7 +46,7 @@ async def on_ready():
 async def on_voice_state_update(member, before, after):
     global cat
     #print("aaa")
-    guild = member.guild
+    guild = member.guild    
     channel = discord.utils.get(member.guild.channels, name="Join to Create")
     channel_id = channel.id
     #print(channel_id)
@@ -109,6 +112,7 @@ async def help(ctx):
     em = discord.Embed(title = "Help", description = "This is the help menu. DM Sand#4193 for assistance or feedback.")
     em.add_field(name="Setup",value="!setup, !invite")
     em.add_field(name="Voice Channels",value="!lock, !unlock")
+    em.add_field(name="Other",value="!servers, !created, !version, !joke")
     await ctx.send(embed=em)
     return
 
@@ -119,6 +123,38 @@ async def invite(ctx):
     await channel.send("Here is my invite link:")
     await channel.send("https://bit.ly/3huSe00")
     return
+
+
+
+@client.command()
+async def servers(ctx):
+    servers = len(client.guilds)
+    if servers >= 1:
+        print("I am in "+ str(servers) + " server.")
+        await ctx.send("I am in "+ str(servers) + " server.")
+        return
+
+    else:
+        
+        print("I am in "+ str(servers) + " servers.")
+        await ctx.send("I am in "+ str(servers) + " servers.")
+        return
+    
+    
+    
+@client.command()   #created
+async def created(ctx):
+    date = ctx.author.created_at
+    format_date = str(date.day) + "/" + str(date.month) + "/" + str(date.year) + "  DD/MM/YYYY"
+    await ctx.send("Your account was created on " + format_date)
+    
+    
+
+@client.command()
+async def version(ctx):
+    await ctx.send("Bots current version is on v0.6")#change every update
+    return
+    
 
 
 
