@@ -5,18 +5,19 @@ from discord.client import Client
 from discord.ext import commands
 from discord.ext.commands.core import command
 import datetime #need to install this on the live server
+import json
 
 
 
 
 
 
-client = commands.Bot(command_prefix = "!",description='I am a VoiceChannel Bot, DM Sand#4193 for assistance')
+client = commands.Bot(command_prefix = "=",description='I am a VoiceChannel Bot, DM Sand#4193 for assistance')
 
 
 
 #cogs
-cogs = ['cogs.voicestate','cogs.jokes']
+cogs = ['cogs.voicestate','cogs.jokes','cogs.cats','cogs.crypto']
 
 for cog in cogs:
     try:
@@ -34,7 +35,7 @@ client.remove_command("help")
 async def on_ready():
     print('We have logged in as {0.user}'.format(client))
     server_amt = len(client.guilds)
-    listning = "for !help | " + str(server_amt) + " servers"
+    listning = "for =help | " + str(server_amt) + " servers"
     # Setting `Listening ` status
     await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=listning))
     return
@@ -110,9 +111,9 @@ async def setup(ctx):
 @client.command()
 async def help(ctx):
     em = discord.Embed(title = "Help", description = "This is the help menu. DM Sand#4193 for assistance or feedback.")
-    em.add_field(name="Setup",value="!setup, !invite")
-    em.add_field(name="Voice Channels",value="!lock, !unlock")
-    em.add_field(name="Other",value="!servers, !created, !version, !joke")
+    em.add_field(name="Setup",value="=setup, =invite")
+    em.add_field(name="Voice Channels",value="=lock, =unlock")
+    em.add_field(name="Other",value="=servers, =created, =version, =joke, =cat, =crypto")
     await ctx.send(embed=em)
     return
 
@@ -129,7 +130,7 @@ async def invite(ctx):
 @client.command()
 async def servers(ctx):
     servers = len(client.guilds)
-    if servers >= 1:
+    if servers <= 1:
         print("I am in "+ str(servers) + " server.")
         await ctx.send("I am in "+ str(servers) + " server.")
         return
@@ -147,7 +148,7 @@ async def created(ctx):
     date = ctx.author.created_at
     format_date = str(date.day) + "/" + str(date.month) + "/" + str(date.year) + "  DD/MM/YYYY"
     await ctx.send("Your account was created on " + format_date)
-    
+    return
     
 
 @client.command()

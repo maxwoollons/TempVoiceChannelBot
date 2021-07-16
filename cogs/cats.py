@@ -12,7 +12,7 @@ import requests
 
 client = commands.Bot(command_prefix = "=")
 
-class jokes(commands.Cog):
+class cats(commands.Cog):
     def __init__(self, client):
         self.client = client
         
@@ -21,17 +21,16 @@ class jokes(commands.Cog):
 
 
     @commands.command()
-    async def joke(self, ctx):
-        response = requests.get("https://official-joke-api.appspot.com/random_joke")
+    async def cat(self, ctx):
+        response = requests.get("https://thatcopy.pw/catapi/rest/")
         #joke = response.json()['setup'] + " " + response.json()['punchline']
         #print(joke)
-        await ctx.send(response.json()['setup'])
-        await ctx.send(response.json()['punchline'])
+        await ctx.send(response.json()['webpurl'])
         return
 
 
 
 
 def setup(client):
-    client.add_cog(jokes(client))
+    client.add_cog(cats(client))
 

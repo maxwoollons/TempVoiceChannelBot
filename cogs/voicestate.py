@@ -2,7 +2,7 @@ import discord
 from discord.client import Client
 from discord.ext import commands
 
-client = commands.Bot(command_prefix = "!")
+client = commands.Bot(command_prefix = "=")
 
 class voicestate(commands.Cog):
     def __init__(self, client):
