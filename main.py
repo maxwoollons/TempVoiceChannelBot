@@ -153,7 +153,7 @@ async def created(ctx):
 
 @client.command()
 async def version(ctx):
-    await ctx.send("Bots current version is on v0.6")#change every update
+    await ctx.send("Bots current version is on v0.7")#change every update
     return
     
 
